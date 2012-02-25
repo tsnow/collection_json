@@ -1,6 +1,9 @@
 # CollectionJson
 
-TODO: Write a gem description
+A gem to help with producing Hypermedia APIs with a MIME type of
+'application/vnd.collection+json'
+
+see http://amundsen.com/media-types/collection/format/#link-relations
 
 ## Installation
 
@@ -18,7 +21,24 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+This is still experimental at the moment.
+The aim is to be able to include the gem in a Rack app and make for easy
+generation of hypermedia APIs from your resources, effectively something like a
+hypermedia presenter.
+
+I'm not clear on the details of how the objects will be presented as
+Collection+JSON as there is an emphasis on Collections rather than individual
+items. This makes sense if you think of Rails controllers being plural.
+
+But it is reasonably different to being used to having the primary unit of data
+being a singular model.
+
+```ruby
+  SingularActiveRecordObject.all
+
+  #versus:
+  PluralJsonCollection.new collection_of_objects
+```
 
 ## Contributing
 
