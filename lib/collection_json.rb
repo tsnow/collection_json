@@ -1,5 +1,6 @@
 require 'json'
 require 'active_support/core_ext/string'
+require 'collection_json/version'
 
 #see http://amundsen.com/media-types/collection/format/#link-relations
 
