@@ -1,7 +1,26 @@
 require File.expand_path('spec/spec_helper')
 
+class HerdOfSpiderCows
+  include CollectionJson
+  extend CollectionJson::CrudOperations
+
+  def initialize items, links=[], queries=[], template={}
+    @items, @links, @queries, @template = items, links, queries, template
+  end
+end
+
 describe CollectionJson::CrudOperations do
+  let(:spider_cows) { HerdOfSpiderCows.new [1,2,3],
+                      ['/spider_cow/1', '/spider_cow/2', 'spider_cow/3']
+  queries = [],
+    template = CollectionJson::Template.new(:legs, :eyes)
+
+  }
+
+
   describe ".create" do
+    CollectionJson.new()
+    create
     #1.1.2. Adding an Item
     #To create a new item in the collection, the client first uses the template object to compose a valid item representation and then uses HTTP POST to send that representation to the server for processing.
 

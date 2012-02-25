@@ -2,8 +2,6 @@ require File.expand_path('spec/spec_helper')
 
 class HerdOfSpiderCows
   include CollectionJson
-  extend CollectionJson::CrudOperations
-  extend CollectionJson::Query
 
   def initialize items, links=[], queries=[], template={}
     @items, @links, @queries, @template = items, links, queries, template
