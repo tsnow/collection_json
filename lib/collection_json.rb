@@ -9,6 +9,8 @@ require 'collection_json/version'
 # This is a REQUIRED object and there MUST NOT be more than one collection object in a Collection+JSON document.
 # It is a top-level document property.
 module CollectionJson
+  attr_writer :href, :links, :items, :queries, :template
+
   def to_json
     {collection: collection}.to_json
   end
