@@ -4,9 +4,9 @@ require File.expand_path('../lib/collection_json/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["Mark Burns"]
   gem.email         = ["markthedeveloper@gmail.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
-  gem.homepage      = ""
+  gem.description   = %q{Help create Collection+JSON hypermedia APIs}
+  gem.summary       = %q{As specified by: http://amundsen.com/media-types/collection/format/#objects}
+  gem.homepage      = "https://github.com/markburns/collection_json"
 
   gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   gem.files         = `git ls-files`.split("\n")
