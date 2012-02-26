@@ -8,3 +8,4 @@ vendor/gems/*
 *.swp
 **/*.swp
 pkg
+Gemfile.lock
