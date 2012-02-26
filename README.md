@@ -1,9 +1,32 @@
 # CollectionJson
 
-A gem to help with producing Hypermedia APIs with a MIME type of
+An experimental gem to help with producing Hypermedia APIs with a MIME type of
 'application/vnd.collection+json'
 
 see http://amundsen.com/media-types/collection/format/#link-relations
+
+##Notes
+
+Collection+JSON specifies the following concepts
+
+Create, Read, Update, Delete, Template and Query
+which correspond to the ideas in Rails of
+
+create, show, update, destroy, edit/new and index
+
+The read like operations are:
+| |
+<table>
+  <tr>
+    <th>Verb</th><th>Rails</th><th>Collection+JSON</th>
+  </tr>
+  <tr><td>POST  </td><td>create  </td><td>create</td></tr>
+  <tr><td>GET   </td><td>show    </td><td>read</td></tr>
+  <tr><td>PUT  </td> <td>update  </td><td>update</td></tr>
+  <tr><td>DELETE</td><td>destroy </td><td>delete</td></tr>
+  <tr><td>GET   </td><td>edit/new</td><td>template</td></tr>
+  <tr><td>GET   </td><td>index   </td><td>query</td></tr>
+</table>
 
 ## Installation
 
