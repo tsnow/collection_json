@@ -12,6 +12,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency  'i18n'
 
   gem.add_development_dependency  'rspec'
+  gem.add_development_dependency  'ruby-debug19'
 
   gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   gem.files         = `git ls-files`.split("\n")

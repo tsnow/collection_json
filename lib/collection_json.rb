@@ -11,7 +11,18 @@ require 'collection_json/version'
 # object in a Collection+JSON document.
 # It is a top-level document property.
 module CollectionJson
-  attr_writer :href, :links, :items, :queries, :template
+  def self.included base
+    base.class_eval do
+      include Virtus
+      attribute :href,   String, default:
+        ->(coll, a){ "/" + coll.class.to_s.underscore.pluralize}
+
+      attribute :links,  Array
+      attribute :items,  Array
+      attribute :queries,  Array
+      attribute :template, Object
+    end
+  end
 
   def to_json
     {collection: collection}.to_json
@@ -36,10 +47,6 @@ module CollectionJson
       template: template, #The collection object MAY have an template object child property.
       error: error #The collection object MAY have an error object child property.
     }
-  end
-
-  def href
-    @href || "/#{self.class.to_s.underscore.pluralize}"
   end
 
   #3.4 links

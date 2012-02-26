@@ -18,8 +18,8 @@ require File.expand_path('spec/spec_helper')
 class Book
   include CollectionJson::Query
 
-  url "http://example.org/search"
-  rel "search"
+  url    "http://example.org/search"
+  rel    "search"
   prompt "Enter search string"
 
   attribute :title,         String
@@ -49,7 +49,8 @@ describe CollectionJson::Query do
       ]
     }
   end
- let(:query_template_with_count) do
+
+  let(:query_template_with_count) do
     # query template sample
     {
       queries:

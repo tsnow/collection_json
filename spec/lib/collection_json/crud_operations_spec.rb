@@ -3,19 +3,14 @@ require File.expand_path('spec/spec_helper')
 class HerdOfSpiderCows
   include CollectionJson
   extend CollectionJson::CrudOperations
-
-  def initialize items, links=[], queries=[], template={}
-    @items, @links, @queries, @template = items, links, queries, template
-  end
 end
 
 describe CollectionJson::CrudOperations do
   let(:spider_cows) do
-    HerdOfSpiderCows.new [1,2,3],
-      ['/spider_cow/1', '/spider_cow/2', 'spider_cow/3']
-    queries = [],
-      template = CollectionJson::Template.new(:legs, :eyes)
-
+    HerdOfSpiderCows.new items: [1,2,3],
+      links: ['/spider_cow/1', '/spider_cow/2', 'spider_cow/3'],
+      queries: [],
+      template: CollectionJson::Template.new(:legs, :eyes)
   end
 
   #1.1.2. Adding an Item
