@@ -3,7 +3,7 @@
 An experimental gem to help with producing Hypermedia APIs with a MIME type of
 'application/vnd.collection+json'
 
-see http://amundsen.com/media-types/collection/format/#link-relations
+see http://amundsen.com/media-types/collection/format/
 
 ##Notes
 
