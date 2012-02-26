@@ -27,13 +27,11 @@ module CollectionJson
     end
 
     included do
-      class_eval do
-        class << self
-          [:url, :rel, :prompt].each do |a|
-            define_method a do |*args|
-              return instance_variable_set("@#{a}", args[0]) if args.any?
-              instance_variable_get "@#{a}"
-            end
+      class << self
+        [:url, :rel, :prompt].each do |a|
+          define_method a do |*args|
+            return instance_variable_set("@#{a}", args[0]) if args.any?
+            instance_variable_get "@#{a}"
           end
         end
       end
