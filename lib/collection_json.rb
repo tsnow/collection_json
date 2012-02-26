@@ -78,7 +78,6 @@ module CollectionJson
       # to 1.0.
       attribute :version,  String, default: "1.0"
     end
-
   end
 
   def to_json
