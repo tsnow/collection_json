@@ -2,17 +2,18 @@ require File.expand_path('spec/spec_helper')
 
 class HerdOfSpiderCows
   include CollectionJson
+  include Virtus
 
-  def initialize items, links=[], queries=[], template={}
-    @items, @links, @queries, @template = items, links, queries, template
-  end
+  attribute :items, Array
+  attribute :links, Array
+  attribute :queries, Array
+  attribute :template, Object
 end
 
 #see http://amundsen.com/media-types/collection/format/#link-relations
 describe CollectionJson do
   let(:spider_cows) { HerdOfSpiderCows.new [1,2,3],
                       ['/spider_cow/1', '/spider_cow/2', 'spider_cow/3'] }
-
 
   describe "#href" do
     specify {spider_cows.href.should == "/herd_of_spider_cows" }

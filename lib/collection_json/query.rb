@@ -1,6 +1,7 @@
 require 'active_support/deprecation'
 require 'active_support/concern'
 require 'virtus'
+require 'virtus/attribute'
 
 module CollectionJson
   module Query

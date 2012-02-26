@@ -1,4 +1,5 @@
 require 'json'
+require 'active_support/lazy_load_hooks'
 require 'active_support/core_ext/string'
 require 'collection_json/version'
 
@@ -6,7 +7,8 @@ require 'collection_json/version'
 
 #  2.1. collection
 # The collection object contains all the "records" in the representation.
-# This is a REQUIRED object and there MUST NOT be more than one collection object in a Collection+JSON document.
+# This is a REQUIRED object and there MUST NOT be more than one collection
+# object in a Collection+JSON document.
 # It is a top-level document property.
 module CollectionJson
   attr_writer :href, :links, :items, :queries, :template

@@ -10,23 +10,38 @@ class HerdOfSpiderCows
 end
 
 describe CollectionJson::CrudOperations do
-  let(:spider_cows) { HerdOfSpiderCows.new [1,2,3],
-                      ['/spider_cow/1', '/spider_cow/2', 'spider_cow/3']
-  queries = [],
-    template = CollectionJson::Template.new(:legs, :eyes)
+  let(:spider_cows) do
+    HerdOfSpiderCows.new [1,2,3],
+      ['/spider_cow/1', '/spider_cow/2', 'spider_cow/3']
+    queries = [],
+      template = CollectionJson::Template.new(:legs, :eyes)
 
-  }
+  end
+
+  #1.1.2. Adding an Item
+  #POST /my-collection/ HTTP/1.1
+  #Host: www.example.org
+  #Content-Type: application/vnd.collection+json
+
+  #{ "template" : { "data" : [ ...] } }
+
+  #*** RESPONSE ***
+  #201 Created HTTP/1.1
+  #Location: http://www.example.org/my-collection/1
 
 
   describe ".create" do
-    CollectionJson.new()
-    create
     #1.1.2. Adding an Item
     #To create a new item in the collection, the client first uses the template object to compose a valid item representation and then uses HTTP POST to send that representation to the server for processing.
 
     #If the item resource was created successfully, the server responds with a status code of 201 and a Location header that contains the URI of the newly created item resource.
   end
 
+
+  #1.1.1. Reading Collections
+  #GET /my-collection/ HTTP/1.1
+  #Host: www.example.org
+  #Accept: application/vnd.collection+json
 
   describe ".read" do
     #1.1.3. Reading an Item
