@@ -10,12 +10,8 @@ see http://amundsen.com/media-types/collection/format/#link-relations
 Collection+JSON specifies the following concepts
 
 Create, Read, Update, Delete, Template and Query
-which correspond to the ideas in Rails of
+which correspond to the ideas in Rails like so:
 
-create, show, update, destroy, edit/new and index
-
-The read like operations are:
-| |
 <table>
   <tr>
     <th>Verb</th><th>Rails</th><th>Collection+JSON</th>
