@@ -28,25 +28,14 @@ module CollectionJson
 
     included do
       class_eval do
-        def self.url *args
-          return @url = args[0] if args.any?
-          @url
+        class << self
+          [:url, :rel, :prompt].each do |a|
+            define_method a do |*args|
+              return instance_variable_set("@#{a}", args[0]) if args.any?
+              instance_variable_get "@#{a}"
+            end
+          end
         end
-
-        def self.rel *args
-          return @rel = args[0] if args.any?
-          @rel
-        end
-
-        def self.prompt *args
-          return @prompt = args[0] if args.any?
-          @prompt
-        end
-
-        def self.query
-          yield
-        end
-
       end
     end
   end
