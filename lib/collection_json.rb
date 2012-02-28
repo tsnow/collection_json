@@ -1,4 +1,7 @@
+require "active_support/dependencies/autoload"
+require "active_support/version"
 require 'json'
+
 require 'active_support/lazy_load_hooks'
 require 'active_support/core_ext/string'
 require 'collection_json/version'
@@ -11,6 +14,14 @@ require 'collection_json/version'
 # object in a Collection+JSON document.
 # It is a top-level document property.
 module CollectionJson
+  extend ActiveSupport::Autoload
+
+  autoload :Rack
+  autoload :Link
+  autoload :InvalidJsonError, 'collection_json/exceptions'
+  autoload :InvalidUriError,  'collection_json/exceptions'
+
+
   def self.included base
     base.class_eval do
       include Virtus
@@ -43,8 +54,6 @@ module CollectionJson
       #Each item in a Collection+JSONcollection has an assigned URI
       #(via the href property) and an optional array of one or more data
       #elements along with an optional array of one or more link elements.
-
-
       attribute :items,    Array
 
       #The collection object MAY have an template object child property.
