@@ -5,7 +5,7 @@ describe CollectionJson::Rack::Parser do
 
   describe "#initialize" do
     specify do
-      ->{CollectionJson::Rack::Parser.new ""}.should raise_error CollectionJson::InvalidJsonException
+      ->{CollectionJson::Rack::Parser.new ""}.should raise_error CollectionJson::InvalidJsonError
     end
   end
 

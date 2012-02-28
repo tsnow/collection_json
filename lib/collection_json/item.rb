@@ -1,0 +1,3 @@
+class CollectionJson::Item
+
+end

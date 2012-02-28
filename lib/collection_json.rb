@@ -1,8 +1,10 @@
 require "active_support/dependencies/autoload"
 require "active_support/version"
 require 'json'
+require 'virtus'
 
 require 'active_support/lazy_load_hooks'
+require 'active_support/concern'
 require 'active_support/core_ext/string'
 require 'collection_json/version'
 
@@ -19,6 +21,10 @@ module CollectionJson
   autoload :Rack
   autoload :Link
   autoload :InvalidJsonError, 'collection_json/exceptions'
+  autoload :Interactions
+  autoload :Item
+  autoload :Query
+  autoload :Template
   autoload :InvalidUriError,  'collection_json/exceptions'
 
 

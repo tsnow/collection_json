@@ -1,15 +1,15 @@
 describe CollectionJson::Link do
   let(:link) do
-    CollectionJson::Link.new href: "http://localhost:3000/mutants/"
+    CollectionJson::Link.new href: "http://localhost:3000/mutants/", rel: "mutants"
   end
 
   specify do
-    ->{CollectionJson::Link.new(href: "asdf:").
+    ->{CollectionJson::Link.new(href: "asdf:", rel: "mutants").
               should raise_error CollectionJson::InvalidUriError}
   end
 
   specify do
-    ->{CollectionJson::Link.new(href: "http://www.google.com").
+    ->{CollectionJson::Link.new(href: "http://www.google.com", rel: "search").
        should_not raise_error CollectionJson::InvalidUriError}
   end
 

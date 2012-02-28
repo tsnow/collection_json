@@ -9,10 +9,12 @@ class CollectionJson::Link
   attribute :name,   String
   attribute :render, String
 
-  def initialize *args
-    debugger
-    super args
-    self.href = URI.parse(href).to_s
+  def initialize args
+    self.href    = URI.parse(args[:href]).to_s
+    self.rel     = args[:rel]
+    self.prompt  = args[:prompt]
+    self.name    = args[:name]
+    self.render  = args[:render]
 
   rescue URI::InvalidURIError => e
     raise CollectionJson::InvalidUriError.new "#{args}" +  e.message
