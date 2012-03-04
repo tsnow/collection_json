@@ -48,26 +48,26 @@ hypermedia presenter.
 Here's a preview of what you should be able to do in a Rails app:
 
 
-![Spider pig](https://github.com/markburns/collection_json/raw/master/doc/spider-pig.gif)
+![Spider cow](https://github.com/markburns/collection_json/raw/master/doc/spider-cow.jpg)
 
 ```ruby
-class SpiderPigController < ApplicationController
+class SpiderCowController < ApplicationController
   respond_to :collection_json
 
   def index
-    @spider_pigs = SpiderPigDecorator.all do |s|
-      s.href spider_pigs_path
-      s.item_links [{href: spider_pig_path(s), rel: "self"}]
+    @spider_cows = SpiderCowDecorator.all do |s|
+      s.href spider_cows_path
+      s.item_links [{href: spider_cow_path(s), rel: "self"}]
     end
 
-    respond_with @spider_pigs
+    respond_with @spider_cows
   end
 end
 
-class SpiderPig < ActiveRecord::Base
+class SpiderCow < ActiveRecord::Base
 end
 
-class SpiderPigDecorator
+class SpiderCowDecorator
   include CollectionJson::Decorator
 end
 ```
