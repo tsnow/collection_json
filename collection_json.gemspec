@@ -22,5 +22,5 @@ Gem::Specification.new do |gem|
   gem.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   gem.name          = "collection_json"
   gem.require_paths = ["lib"]
-  gem.version       = CollectionJson::VERSION
+  gem.version       = CollectionJson::GEM_VERSION
 end

@@ -8,7 +8,7 @@ require 'active_support/lazy_load_hooks'
 require 'active_support/concern'
 require 'active_support/core_ext/string'
 require 'active_support/core_ext/hash'
-require 'collection_json/version'
+require 'collection_json/gem_version'
 require 'draper'
 
 #see http://amundsen.com/media-types/collection/format/#link-relations
