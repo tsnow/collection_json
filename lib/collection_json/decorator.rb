@@ -1,14 +1,10 @@
 module CollectionJson::Decorator
-  extend ActiveSupport::Concern
+  def decorate_collection items, options={}
+    Collection.new items, options
+  end
 
-  module ClassMethods
-    def decorate_collection items, options={}
-      Collection.new items, options
-    end
-
-    def decorate_item item, options={}
-      Item.new item, options
-    end
+  def decorate_item item, options={}
+    Item.new item, options
   end
 
 

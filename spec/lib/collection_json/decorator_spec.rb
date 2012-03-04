@@ -7,7 +7,7 @@ class BananaFish < OpenStruct
 end
 
 class BananaFishDecorator
-  include CollectionJson::Decorator
+  extend CollectionJson::Decorator
 
 end
 
