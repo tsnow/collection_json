@@ -47,6 +47,9 @@ hypermedia presenter.
 
 Here's a preview of what you should be able to do in a Rails app:
 
+
+![Spider pig](https://github.com/markburns/collection_json/raw/master/doc/spider-pig.gif)
+
 ```ruby
 class SpiderPigController < ApplicationController
   respond_to :collection_json
