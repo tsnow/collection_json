@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-require File.expand_path('../lib/collection_json/version', __FILE__)
+require File.expand_path('../lib/collection_json/gem_version', __FILE__)
 
 Gem::Specification.new do |gem|
   gem.authors       = ["Mark Burns"]
