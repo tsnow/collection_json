@@ -2,55 +2,34 @@ module CollectionJson::Decorator
   extend ActiveSupport::Concern
 
   module ClassMethods
+    def define_self_link &block
+      @self_link_lambda = block
+    end
+
+    def define_item_links &block
+      @item_link_lambda = block
+    end
+
     def decorate_collection items, options={}
       CollectionJson::Collection.new items, options
     end
 
-    def decorate_item item, options={}
+    def decorate_item item, options={}, klass=''
       CollectionJson::Item.new item, options
     end
 
-    def decorate object, options={}
-      if object.is_a? Enumerable
-        decorate_collection object, options
+    def decorate object, options={}, &block
+      if object.respond_to? :each
+        decorate_collection(object, options).tap do |c|
+          c.items = c.items.map do |i|
+            yield i
+          end if block_given?
+        end
       else
-        decorate_item object, options
+        item = decorate_item object, options
+        yield item if block_given?
+        item
       end
-    end
-  end
-
-  module Shared
-    extend ActiveSupport::Concern
-
-    included do
-      class_eval do
-        attr_accessor :links, :version, :href
-
-        private
-        attr_accessor :object
-      end
-    end
-
-    def setup object, options
-      @version    = "1.0"
-      @object     = object          #singular or collection of items
-      @links      = options[:links] || [options[:link]] #top level links
-      @href       = options[:href]  #top level href
-    end
-
-    def representation
-      {
-        collection: {
-          version: version,
-          href:    href,
-          links:   links,
-          items:   object
-        }
-      }
-    end
-
-    def to_json
-      representation.to_json
     end
   end
 end

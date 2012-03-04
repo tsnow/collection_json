@@ -22,8 +22,9 @@ describe "CollectionJson", type: :integration do
 
     it "defines the link using a lambda" do
       items = @spider_cows.items
-      debugger
-      items.first.links.should == [{href: "spider_cows/1", rel: "show"}]
+      item = items.first
+
+      item.item_links.should == [{href: "/spider_cows/1", rel: "self"}]
     end
   end
 end

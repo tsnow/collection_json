@@ -1,5 +1,6 @@
 require "active_support/dependencies/autoload"
 require "active_support/version"
+require "delegate"
 require 'json'
 require 'virtus'
 
@@ -23,24 +24,13 @@ module CollectionJson
   autoload :Rack
   autoload :Collection
   autoload :Link
-  autoload :InvalidJsonError, 'collection_json/exceptions'
   autoload :Item
   autoload :Query
   autoload :Template
+
+  autoload :InvalidJsonError, 'collection_json/exceptions'
   autoload :InvalidUriError,  'collection_json/exceptions'
   autoload :IncompatibleItem, 'collection_json/exceptions'
+
   autoload :Decorator
-
-
-  def self.included base
-    base.class_eval do
-      #The collection object SHOULD have a version property.
-      # For this release, #the value of the version property MUST be set to 1.0.
-      # If there is no version property present, it should be assumed to be set
-      # to 1.0.
-      def version
-        "1.0"
-      end
-    end
-  end
 end

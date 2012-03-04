@@ -1,4 +1,3 @@
-debugger
 require File.expand_path('spec/spec_helper')
 
 class HerdOfSpiderCows

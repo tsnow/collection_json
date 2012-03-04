@@ -79,17 +79,19 @@ describe CollectionJson::Decorator do
 
   describe ".decorate_item" do
     let(:decorated) do
-      BananaFishDecorator.decorate banana_fish,
-        href: "http://example.org/banana_fish/1",
-        links: [{"rel" => "father", "href" => "http://example.com/bananas/tom"},
-        {"rel" => "mother", "href" => "http://example.com/fish/tina"}]
+      BananaFishDecorator.decorate banana_fish do |b|
+        b.href "http://example.org/banana_fish/1"
+        b.links [{"rel" => "father", "href" => "http://example.com/bananas/tom"},
+               {"rel" => "mother", "href" => "http://example.com/fish/tina"}]
+      end
 
     end
 
     let(:decorated_2) do
-      BananaFishDecorator.decorate banana_fish_2,
-        href: "http://example.org/banana_fish/2",
-        links: [{"rel" =>  "father", "href" => "http://example.com/bananas/tom"}]
+      BananaFishDecorator.decorate banana_fish_2 do |b|
+        b.href  "http://example.org/banana_fish/2"
+        b.links  [{"rel" =>  "father", "href" => "http://example.com/bananas/tom"}]
+      end
 
     end
     let(:expected) do
@@ -137,21 +139,21 @@ describe CollectionJson::Decorator do
     before do
       decorated_json   = decorated.to_json
       decorated_json_2 = decorated_2.to_json
-      @parsed          = JSON.parse(decorated_json)["collection"]
-      @parsed_2        = JSON.parse(decorated_json_2)["collection"]
+
+      @parsed          = JSON.parse(decorated_json  )
+      @parsed_2        = JSON.parse(decorated_json_2)
     end
 
     %w(version href link items).each do |a|
       specify ", #{a} should match"do
-        @parsed[a].  should == expected["collection"][a]
-        @parsed_2[a].should == expected_2["collection"][a]
+        @parsed.should == expected
       end
     end
   end
 
   describe ".decorate_collection" do
     let(:expected_2) do
-      {
+      {"collection" =>{
         "version" => "1.0",
         "href" => "http://example.org/banana_fish/",
 
@@ -174,6 +176,7 @@ describe CollectionJson::Decorator do
               ]
             }
           ]
+        }
       }
     end
     let(:collection) do
@@ -186,9 +189,9 @@ describe CollectionJson::Decorator do
       JSON.parse(collection.to_json)
     end
 
-    %w([version href link).each do |a|
+    %w(version href link).each do |a|
       specify ", #{a} should match"do
-        parsed[a].should == expected_2[a]
+        parsed["collection"][a].should == expected_2["collection"][a]
       end
     end
 
