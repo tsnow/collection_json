@@ -19,7 +19,7 @@ module CollectionJson::Decorator
     end
   end
 
-  module DecoratorShared
+  module Shared
     extend ActiveSupport::Concern
 
     included do
@@ -51,50 +51,6 @@ module CollectionJson::Decorator
 
     def to_json
       representation.to_json
-    end
-  end
-
-  class Collection
-    include DecoratorShared
-
-    def initialize items, options
-      setup items, options
-    end
-
-    def items
-      object.map { |i| Item.new(i) }
-    end
-
-    def attributes
-      items.map &:attributes
-    end
-  end
-
-  class Item
-    include DecoratorShared
-
-    def initialize object, options={}
-      unless object.respond_to? :attributes
-        raise CollectionJson::IncompatibleItem.new("Decorated items must have an attributes method")
-      end
-      setup object, options
-    end
-
-    def representation
-      {
-        collection: {
-          version: version,
-          href:    href,
-          links:   links,
-          items:   [{data: attributes}]
-        }
-      }
-    end
-
-    def attributes
-      debugger
-      @attributes = @object.attributes || {}
-      @attributes.map{|k,v|  {name: k.to_s, value: v}}
     end
   end
 end
