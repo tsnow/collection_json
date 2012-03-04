@@ -1,31 +1,51 @@
 module CollectionJson::Decorator
-  def decorate_collection items, options={}
-    Collection.new items, options
-  end
+  extend ActiveSupport::Concern
 
-  def decorate_item item, options={}
-    Item.new item, options
+  module ClassMethods
+    def decorate_collection items, options={}
+      Collection.new items, options
+    end
+
+    def decorate_item item, options={}
+      Item.new item, options
+    end
+
+    def decorate object, options={}
+      if object.is_a? Enumerable
+        decorate_collection object, options
+      else
+        decorate_item object, options
+      end
+    end
   end
 
   module DecoratorShared
     extend ActiveSupport::Concern
 
     included do
-      class_eval { attr_reader :links, :href, :version }
+      class_eval do
+        attr_accessor :links, :version, :href
+
+        private
+        attr_accessor :object
+      end
     end
 
     def setup object, options
-      @version = "1.0"
-      @object = object
-      @links = options[:links]
-      @href  = options[:href]
+      @version    = "1.0"
+      @object     = object          #singular or collection of items
+      @links      = options[:links] || [options[:link]] #top level links
+      @href       = options[:href]  #top level href
     end
 
     def representation
-      { version: version,
-        href:    href,
-        links:   links,
-        items:   @object
+      {
+        collection: {
+          version: version,
+          href:    href,
+          links:   links,
+          items:   object
+        }
       }
     end
 
@@ -42,7 +62,11 @@ module CollectionJson::Decorator
     end
 
     def items
-      @items.map{|i| Item.new(i).attributes}
+      object.map { |i| Item.new(i) }
+    end
+
+    def attributes
+      items.map &:attributes
     end
   end
 
@@ -56,19 +80,21 @@ module CollectionJson::Decorator
       setup object, options
     end
 
-
-    def to_json
-      representation.tap do |r|
-        r[:items] = [{data: item}]
-      end.to_json
+    def representation
+      {
+        collection: {
+          version: version,
+          href:    href,
+          links:   links,
+          items:   [{data: attributes}]
+        }
+      }
     end
 
     def attributes
-      @object.attributes.map{|k,v|  {name: k, value: v}}
-    end
-
-    def item
-      attributes
+      debugger
+      @attributes = @object.attributes || {}
+      @attributes.map{|k,v|  {name: k.to_s, value: v}}
     end
   end
 end

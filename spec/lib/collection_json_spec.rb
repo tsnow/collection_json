@@ -1,47 +1,36 @@
-require File.expand_path('spec/spec_helper')
+# see http://amundsen.com/media-types/collection/format/#link-relations
 
-class HerdOfSpiderCows
-  include CollectionJson
-end
+# example usage:
+# class SpiderCowDecorator
+#   include CollectionJson
+# end
+#
+# class SpiderCowController
+#   def spider_cow_path object
+#     "/spider_cows/#{object.id}"
+#   end
+#
+#   def index
+#     spider_cows = SpiderCow.all
+#
+#     @spider_cows = SpiderCowDecorator.new spider_cows,
+#       link: ->(i) {spider_cow_path(i)}
+#   end
+#
+#   def show
+#     spider_cow = SpiderCow.new params[:id]
+#
+#     @spider_cow = spider_cow.decorate! link: spider_cow_path(spider_cow)
+#   end
+# end
+#
+# class SpiderCow
+#   include CollectionJson::Item
+#
+#   def initialize id
+#     @id = id
+#   end
+# end
 
-#see http://amundsen.com/media-types/collection/format/#link-relations
 describe CollectionJson do
-  let(:spider_cows) { HerdOfSpiderCows.new items: [1,2,3],
-                      links: ['/spider_cow/1', '/spider_cow/2', 'spider_cow/3'] }
-
-  describe "#href" do
-    specify {spider_cows.href.should == "/herd_of_spider_cows" }
-
-    specify do
-      spider_cows.href= "/gathering_of_spider_cows"
-      spider_cows.href.should == "/gathering_of_spider_cows"
-    end
-  end
-
-  describe "#links" do
-   specify "has links" do
-      spider_cows.links.should ==
-        ['/spider_cow/1', '/spider_cow/2', 'spider_cow/3']
-    end
-
-   specify do
-     spider_cows.links = %w[egg banana cheese]
-     spider_cows.links.should == %w[egg banana cheese]
-   end
-  end
-
-  describe "#collection" do
-    specify do
-      spider_cows.collection.should be_a Hash
-    end
-
-    specify "has items" do
-      spider_cows.collection[:items].should == [1,2,3]
-    end
-
-    specify "has links" do
-      spider_cows.collection[:links].should ==
-        ['/spider_cow/1', '/spider_cow/2', 'spider_cow/3']
-    end
-  end
 end
