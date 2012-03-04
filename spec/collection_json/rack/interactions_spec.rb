@@ -1,11 +1,12 @@
+debugger
 require File.expand_path('spec/spec_helper')
 
 class HerdOfSpiderCows
   include CollectionJson
-  extend CollectionJson::Interactions
+  extend CollectionJson::Rack::Interactions
 end
 
-describe CollectionJson::Interactions do
+describe CollectionJson::Rack::Interactions do
   let(:spider_cows) do
     HerdOfSpiderCows.new items: [1,2,3],
       links: ['/spider_cow/1', '/spider_cow/2', 'spider_cow/3'],

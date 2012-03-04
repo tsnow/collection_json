@@ -1,52 +1,50 @@
-module CollectionJson
-  module Interactions
-    extend ActiveSupport::Concern
+module CollectionJson::Rack::Interactions
+  extend ActiveSupport::Concern
 
-    module ClassMethods
-      def create params #POST
+  module ClassMethods
+    def create params #POST
 
-      end
+    end
 
-      def read id #GET
+    def read id #GET
 
-      end
+    end
 
-      def update params #PUT
+    def update params #PUT
 
-      end
+    end
 
-      def delete id #DELETE
+    def delete id #DELETE
 
-      end
+    end
 
-      def query params #GET
+    def query params #GET
 
-      end
+    end
 
-      def template #GET
+    def template #GET
 
-      end
+    end
 
-      #Rails style aliases
-      def show id #GET
-        read id
-      end
+    #Rails style aliases
+    def show id #GET
+      read id
+    end
 
-      def index params #GET
-        query params
-      end
+    def index params #GET
+      query params
+    end
 
-      def destroy #DELETE
-        delete id
-      end
+    def destroy #DELETE
+      delete id
+    end
 
-      def new #GET
-        template
-      end
+    def new #GET
+      template
+    end
 
-      def edit #GET
-        template
-      end
+    def edit #GET
+      template
     end
   end
 end

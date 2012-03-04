@@ -1,4 +1,4 @@
-require './spec/support/integration'
+require './spec/support/sample_mvc'
 
 describe "CollectionJson", type: :integration do
   let(:controller) { SpiderCowController.new      }

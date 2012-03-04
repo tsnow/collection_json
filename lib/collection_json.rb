@@ -12,6 +12,7 @@ require 'draper'
 
 #see http://amundsen.com/media-types/collection/format/#link-relations
 
+debugger
 #  2.1. collection
 # The collection object contains all the "records" in the representation.
 # This is a REQUIRED object and there MUST NOT be more than one collection
@@ -23,7 +24,6 @@ module CollectionJson
   autoload :Rack
   autoload :Link
   autoload :InvalidJsonError, 'collection_json/exceptions'
-  autoload :Interactions
   autoload :Item
   autoload :Query
   autoload :Template
