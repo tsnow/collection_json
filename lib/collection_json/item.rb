@@ -1,3 +1,7 @@
+#The collection object MAY have an items array child property.
+#Each item in a Collection+JSONcollection has an assigned URI
+#(via the href property) and an optional array of one or more data
+#elements along with an optional array of one or more link elements.
 module CollectionJson
   class Item
     include Decorator::Shared

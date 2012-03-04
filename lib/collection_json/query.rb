@@ -3,6 +3,12 @@ require 'active_support/concern'
 require 'virtus'
 require 'virtus/attribute'
 
+
+#3.3. queries
+#The queries array is an OPTIONAL top-level property of the
+#Collection+JSON document.
+#The collection object MAY have an queries
+#array child property.
 module CollectionJson
   module Query
     extend ActiveSupport::Concern

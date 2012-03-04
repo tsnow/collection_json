@@ -15,7 +15,7 @@ class SpiderCowController
     @spider_cows = SpiderCowDecorator.decorate spider_cows
 
     link_generator = ->(i){[{href: spider_cow_path(i), rel: "show"}]}
-    @spider_cows.item_links_lambda = link_generator
+    #@spider_cows.item_links_lambda = link_generator
   end
 
   def show

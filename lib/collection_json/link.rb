@@ -1,6 +1,12 @@
 require 'uri'
 require 'virtus'
-
+#3.4 links
+#The links array is an OPTIONAL child property of the items array
+#The Collection+JSON hypermedia type has a limited set of predefined link
+#relation values and supports additional values applied by implementors
+#in order to better describe the application domain to which the media
+#type is applied.
+##The collection object MAY have an links array child property
 class CollectionJson::Link
   include Virtus
   attribute :href,   String

@@ -16,7 +16,7 @@ describe "CollectionJson", type: :integration do
       items.should be_a Enumerable
 
       items.each do |x|
-        x.should be_a CollectionJson::Decorator::Item
+        x.should be_a CollectionJson::Item
       end
     end
 
