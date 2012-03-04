@@ -45,18 +45,28 @@ The aim is to be able to include the gem in a Rack app and make for easy
 generation of hypermedia APIs from your resources, effectively something like a
 hypermedia presenter.
 
-I'm not clear on the details of how the objects will be presented as
-Collection+JSON as there is an emphasis on Collections rather than individual
-items. This makes sense if you think of Rails controllers being plural.
-
-But it is reasonably different to being used to having the primary unit of data
-being a singular model.
+Here's a preview of what you should be able to do in a Rails app:
 
 ```ruby
-  SingularActiveRecordObject.all
+class SpiderPigController < ApplicationController
+  respond_to :collection_json
 
-  #versus:
-  PluralJsonCollection.new collection_of_objects
+  def index
+    @spider_pigs = SpiderPigDecorator.all do |s|
+      s.href spider_pigs_path
+      s.item_links [{href: spider_pig_path(s), rel: "self"}]
+    end
+
+    respond_with @spider_pigs
+  end
+end
+
+class SpiderPig < ActiveRecord::Base
+end
+
+class SpiderPigDecorator
+  include CollectionJson::Decorator
+end
 ```
 
 ## Contributing
