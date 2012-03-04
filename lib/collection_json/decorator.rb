@@ -3,11 +3,11 @@ module CollectionJson::Decorator
 
   module ClassMethods
     def decorate_collection items, options={}
-      Collection.new items, options
+      CollectionJson::Collection.new items, options
     end
 
     def decorate_item item, options={}
-      Item.new item, options
+      CollectionJson::Item.new item, options
     end
 
     def decorate object, options={}

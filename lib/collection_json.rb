@@ -22,6 +22,7 @@ module CollectionJson
   extend ActiveSupport::Autoload
 
   autoload :Rack
+  autoload :Collection
   autoload :Link
   autoload :InvalidJsonError, 'collection_json/exceptions'
   autoload :Item
