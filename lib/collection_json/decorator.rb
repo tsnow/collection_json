@@ -50,7 +50,6 @@ module CollectionJson::Decorator
     include DecoratorShared
 
     def initialize object, options={}
-      debugger
       unless object.respond_to? :attributes
         raise CollectionJson::IncompatibleItem.new("Decorated items must have an attributes method")
       end
