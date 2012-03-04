@@ -7,50 +7,69 @@ module CollectionJson::Decorator
     Item.new item, options
   end
 
+  module DecoratorShared
+    extend ActiveSupport::Concern
 
-  class Collection
-    attr_reader :links, :href
-    def initialize items, options
-      @items = items
+    included do
+      class_eval { attr_reader :links, :href, :version }
+    end
+
+    def setup object, options
+      @version = "1.0"
+      @object = object
       @links = options[:links]
       @href  = options[:href]
     end
 
-    def to_json
-      { version: "1.0",
+    def representation
+      { version: version,
         href:    href,
         links:   links,
-        items:   items
-      }.to_json
+        items:   @object
+      }
+    end
+
+    def to_json
+      representation.to_json
+    end
+  end
+
+  class Collection
+    include DecoratorShared
+
+    def initialize items, options
+      setup items, options
     end
 
     def items
-      @items.map{|i| i.attributes.map{|k,v| {name: k, value: v}}}
+      @items.map{|i| Item.new(i).attributes}
     end
   end
 
   class Item
-    attr_reader :links, :href
-    def initialize item, options={}
-      unless item.respond_to? :attributes
+    include DecoratorShared
+
+    def initialize object, options={}
+      debugger
+      unless object.respond_to? :attributes
         raise CollectionJson::IncompatibleItem.new("Decorated items must have an attributes method")
       end
-
-      @item  = item
-      @links = options[:links]
-      @href  = options[:href]
+      setup object, options
     end
 
+
     def to_json
-      { version: "1.0",
-        href:    href,
-        links:   links,
-        items:   [{data: item}]
-      }.to_json
+      representation.tap do |r|
+        r[:items] = [{data: item}]
+      end.to_json
+    end
+
+    def attributes
+      @object.attributes.map{|k,v|  {name: k, value: v}}
     end
 
     def item
-      @item.attributes.map{|k,v|  {name: k, value: v}}
+      attributes
     end
   end
 end
