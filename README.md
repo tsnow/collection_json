@@ -76,31 +76,31 @@ end
 Sample output:
 
 ```javascript
-      {"collection" =>{
-        "version" => "1.0",
-        "href" => "http://example.org/spider_cow/",
+{"collection" :
+  {
+    "version" :"1.0",
+    "href" :"http://example.org/spider_cow/",
 
-        "links" => [
-          {"rel" => "father", "href" => "http://example.com/spider_cows/tom"},
-      ],
+    "links" :[ {"rel" :"father", "href" :"http://example.com/spider_cows/tom"}],
 
-      "items" =>
-      [
-        {"data" =>
-         [{"name" => "legs", "value" => 7},
-          {"name" => "eyes", "value" => 8},
-          {"name" => "udders", "value" => "blue"}
-         ]
+    "items" :
+    [
+      {"data" :
+       [{"name" :"legs", "value" :7},
+        {"name" :"eyes", "value" :8},
+        {"name" :"udders", "value" :"blue"}
+       ]
       },
 
-        {"data" =>
-         [{"name" => "legs",  "value" => 6},
-          {"name" => "udders", "value" => "red"}
-         ]
+      {"data" :
+       [{"name" :"legs",  "value" :6},
+        {"name" :"udders", "value" :"red"}
+       ]
       }
-      ]
-      }
-      }
+    ]
+  }
+}
+
 ```
 
 ## Contributing
