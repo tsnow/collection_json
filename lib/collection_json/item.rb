@@ -5,11 +5,10 @@
 module CollectionJson
   class Item
     attr_accessor :version, :object
-    extend FunkySetter
-    funky_setter :href, :links
+    extend FunkyAccessor
+    funky_accessor :href, :links
 
 
-    delegate :method_missing, to: :object
 
     def initialize object, options={}
       unless object.respond_to? :attributes
@@ -23,6 +22,7 @@ module CollectionJson
       @href       = options[:href]  #top level href
     end
 
+    delegate :method_missing, :respond_to?, to: :object
     def to_json
       representation.to_json
     end

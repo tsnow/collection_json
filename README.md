@@ -57,7 +57,7 @@ class SpiderCowController < ApplicationController
   def index
     @spider_cows = SpiderCowDecorator.all do |s|
       s.href spider_cows_path
-      s.item_links [{href: spider_cow_path(s), rel: "self"}]
+      s.item_links [{hspider_cowref: spider_cow_path(s), rel: "self"}]
     end
 
     respond_with @spider_cows
@@ -65,11 +65,42 @@ class SpiderCowController < ApplicationController
 end
 
 class SpiderCow < ActiveRecord::Base
+  #attributes - legs, eyes, udders
 end
 
 class SpiderCowDecorator
   include CollectionJson::Decorator
 end
+```
+
+Sample output:
+
+```javascript
+      {"collection" =>{
+        "version" => "1.0",
+        "href" => "http://example.org/spider_cow/",
+
+        "links" => [
+          {"rel" => "father", "href" => "http://example.com/spider_cows/tom"},
+      ],
+
+      "items" =>
+      [
+        {"data" =>
+         [{"name" => "legs", "value" => 7},
+          {"name" => "eyes", "value" => 8},
+          {"name" => "udders", "value" => "blue"}
+         ]
+      },
+
+        {"data" =>
+         [{"name" => "legs",  "value" => 6},
+          {"name" => "udders", "value" => "red"}
+         ]
+      }
+      ]
+      }
+      }
 ```
 
 ## Contributing

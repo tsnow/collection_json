@@ -1,8 +1,8 @@
 module CollectionJson
   class Collection
     attr_accessor :items, :version
-    extend FunkySetter
-    funky_setter :href, :links
+    extend FunkyAccessor
+    funky_accessor :href, :links
 
 
 

@@ -1,6 +1,7 @@
 require "active_support/dependencies/autoload"
 require "active_support/version"
-require "delegate"
+require 'active_support/core_ext/module/delegation'
+#require "delegate"
 require 'json'
 require 'virtus'
 
@@ -15,7 +16,7 @@ require 'active_support/deprecation'
 require 'active_support/concern'
 require 'virtus'
 require 'virtus/attribute'
-require 'funky_setter'
+require 'funky_accessor'
 
 #see http://amundsen.com/media-types/collection/format/#link-relations
 

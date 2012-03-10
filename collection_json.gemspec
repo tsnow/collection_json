@@ -15,7 +15,6 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'growl'
   gem.add_development_dependency 'rspec'
   gem.add_development_dependency 'ruby-debug19'
-  gem.add_development_dependency 'ruby-debug-base19', '0.11.26'
 
   gem.add_development_dependency 'awesome_print'
 

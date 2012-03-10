@@ -1,7 +1,7 @@
-module FunkySetter
+module FunkyAccessor
   def self.extended base
     class << base
-      def funky_setter *names
+      def funky_accessor *names
         names.each do |name|
           define_method(name) do |arg=nil|
             if block_given?
