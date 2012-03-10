@@ -5,38 +5,6 @@ An experimental gem to help with producing Hypermedia APIs with a MIME type of
 
 see http://amundsen.com/media-types/collection/format/
 
-##Notes
-
-Collection+JSON specifies the following concepts
-
-Create, Read, Update, Delete, Template and Query
-which correspond to the ideas in Rails like so:
-
-<table>
-  <tr>
-    <th>Verb</th><th>Rails</th><th>Collection+JSON</th>
-  </tr>
-  <tr><td>POST  </td><td>create  </td><td>create</td></tr>
-  <tr><td>GET   </td><td>show    </td><td>read</td></tr>
-  <tr><td>PUT  </td> <td>update  </td><td>update</td></tr>
-  <tr><td>DELETE</td><td>destroy </td><td>delete</td></tr>
-  <tr><td>GET   </td><td>edit/new</td><td>template</td></tr>
-  <tr><td>GET   </td><td>index   </td><td>query</td></tr>
-</table>
-
-## Installation
-
-Add this line to your application's Gemfile:
-
-    gem 'collection_json'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install collection_json
 
 ## Usage
 
@@ -79,7 +47,7 @@ Sample output:
 {"collection" :
   {
     "version" :"1.0",
-    "href" :"http://example.org/spider_cow/",
+    "href" :"http://example.org/spider_cows/",
 
     "links" :[ {"rel" :"father", "href" :"http://example.com/spider_cows/tom"}],
 
@@ -103,6 +71,40 @@ Sample output:
 
 ```
 
+
+##Notes
+
+Collection+JSON specifies the following concepts
+
+Create, Read, Update, Delete, Template and Query
+which correspond to the ideas in Rails like so:
+
+<table>
+  <tr>
+    <th>Verb</th><th>Rails</th><th>Collection+JSON</th>
+  </tr>
+  <tr><td>POST  </td><td>create  </td><td>create</td></tr>
+  <tr><td>GET   </td><td>show    </td><td>read</td></tr>
+  <tr><td>PUT   </td><td>update  </td><td>update</td></tr>
+  <tr><td>DELETE</td><td>destroy </td><td>delete</td></tr>
+  <tr><td>GET   </td><td>edit/new</td><td>template</td></tr>
+  <tr><td>GET   </td><td>index   </td><td>query</td></tr>
+</table>
+
+## Installation
+
+Add this line to your application's Gemfile:
+
+    gem 'collection_json'
+
+And then execute:
+
+    $ bundle
+
+Or install it yourself as:
+
+    $ gem install collection_json
+    
 ## Contributing
 
 1. Fork it
