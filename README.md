@@ -25,7 +25,7 @@ class SpiderCowController < ApplicationController
   def index
     @spider_cows = SpiderCowDecorator.all do |s|
       s.href spider_cows_path
-      s.item_links [{hspider_cowref: spider_cow_path(s), rel: "self"}]
+      s.item_links [{href: spider_cow_path(s), rel: "self"}]
     end
 
     respond_with @spider_cows
