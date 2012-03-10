@@ -23,9 +23,11 @@ class SpiderCowController < ApplicationController
   respond_to :collection_json
 
   def index
-    @spider_cows = SpiderCowDecorator.all do |s|
-      s.href spider_cows_path
-      s.item_links [{href: spider_cow_path(s), rel: "self"}]
+    @spider_cows = SpiderCowDecorator.all do |collection, item|
+      collection.href spider_cows_path
+
+      item.links [{href: spider_cow_path(item),        rel: "self"},
+                  {href: spider_cow_path(item.father), rel: "father"}]
     end
 
     respond_with @spider_cows
@@ -104,7 +106,7 @@ And then execute:
 Or install it yourself as:
 
     $ gem install collection_json
-    
+
 ## Contributing
 
 1. Fork it
