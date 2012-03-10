@@ -11,6 +11,12 @@ require 'active_support/core_ext/hash'
 require 'collection_json/gem_version'
 require 'draper'
 
+require 'active_support/deprecation'
+require 'active_support/concern'
+require 'virtus'
+require 'virtus/attribute'
+require 'funky_setter'
+
 #see http://amundsen.com/media-types/collection/format/#link-relations
 
 #  2.1. collection

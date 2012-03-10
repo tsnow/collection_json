@@ -32,7 +32,7 @@ describe CollectionJson::Decorator do
     specify { spider_cows.href.should == "/spider_kine" }
 
     specify do
-      spider_cows.href= "/spider_cows"
+      spider_cows.href "/spider_cows"
       spider_cows.href.should == "/spider_cows"
     end
   end
@@ -41,7 +41,7 @@ describe CollectionJson::Decorator do
     specify { spider_cows.links.should == links }
 
     specify do
-      spider_cows.links         = %w(egg banana cheese)
+      spider_cows.links           %w(egg banana cheese)
       spider_cows.links.should == %w(egg banana cheese)
     end
   end
@@ -53,9 +53,9 @@ describe CollectionJson::Decorator do
 
     specify "has items" do
       spider_cows.representation[:collection][:items].should ==
-      [[{:name=>"name", :value=>"cow_1"}],
-       [{:name=>"name", :value=>"cow_2"}],
-       [{:name=>"name", :value=>"cow_3"}]]
+        [{data: [{:name=>"name", :value=>"cow_1"}]},
+         {data: [{:name=>"name", :value=>"cow_2"}]},
+         {data: [{:name=>"name", :value=>"cow_3"}]}]
     end
 
     specify "has links" do
@@ -76,13 +76,12 @@ describe CollectionJson::Decorator do
     BananaFish.new legs: 6, face: "red"
   end
 
-
   describe ".decorate_item" do
     let(:decorated) do
       BananaFishDecorator.decorate banana_fish do |b|
         b.href "http://example.org/banana_fish/1"
         b.links [{"rel" => "father", "href" => "http://example.com/bananas/tom"},
-               {"rel" => "mother", "href" => "http://example.com/fish/tina"}]
+                 {"rel" => "mother", "href" => "http://example.com/fish/tina"}]
       end
 
     end
@@ -96,44 +95,49 @@ describe CollectionJson::Decorator do
     end
     let(:expected) do
       {"collection" =>
-        {
-          "version" => "1.0",
-          "href" => "http://example.org/banana_fish/1",
+       {
+         "version" => "1.0",
+         "href" => "http://example.org/banana_fish/1",
 
-          "links" => [
-            {"rel" => "father", "href" => "http://example.com/bananas/tom"},
-            {"rel" => "mother", "href" => "http://example.com/fish/tina"}
-          ],
+         "links" => [
+           {"rel" => "father", "href" => "http://example.com/bananas/tom"},
+           {"rel" => "mother", "href" => "http://example.com/fish/tina"}
+       ],
 
-          "items" =>
-            [{"data" =>
-              [{"name" => "legs", "value" => 7},
-               {"name" => "eyes", "value" => 8},
-               {"name" => "color", "value" => "blue"}
-              ]
-        }]}
+         "items" =>
+       [{
+         "href"=>"http://example.org/banana_fish/1",
+         "data" =>
+
+         [{"name" => "legs", "value" => 7},
+          {"name" => "eyes", "value" => 8},
+          {"name" => "color", "value" => "blue"}
+         ]
+       }]}
       }
     end
 
     let(:expected_2) do
       {"collection" =>
        {
-        "version" => "1.0",
-        "href" => "http://example.org/banana_fish/2",
+         "version" => "1.0",
+         "href" => "http://example.org/banana_fish/2",
 
-        "links" => [
-          {"rel" => "father", "href" => "http://example.com/bananas/tom"},
-        ],
+         "links" => [
+           {"rel" => "father", "href" => "http://example.com/bananas/tom"},
+       ],
 
-        "items" =>
-          [
-            {"data" =>
-              [{"name" => "legs",  "value" => 6},
-               {"name" => "face", "value" => "red"}
-              ]
-            }
-          ]
-      }}
+       "items" =>
+       [
+         {
+         "href"=>"http://example.org/banana_fish/1",
+         "data" =>
+         [{"name" => "legs",  "value" => 6},
+          {"name" => "face", "value" => "red"}
+         ]
+       }
+       ]
+       }}
     end
 
     before do
@@ -144,11 +148,42 @@ describe CollectionJson::Decorator do
       @parsed_2        = JSON.parse(decorated_json_2)
     end
 
+    specify { @parsed.keys.should == expected.keys }
+    specify { @parsed.values.should == expected.values }
+
     %w(version href link items).each do |a|
-      specify ", #{a} should match"do
-        @parsed.should == expected
+      specify ", #{a} should match" do
+        @parsed[a].should == expected[a]
+        @parsed_2[a].should == expected_2[a]
       end
     end
+  end
+
+  context "with a block" do
+    class CatDecorator
+      include CollectionJson::Decorator
+    end
+
+    before do
+      cat = {legs: 4, tail: true, id: 1}
+      attributes = cat.merge({attributes: cat})
+
+      cats = [OpenStruct.new(attributes)]
+
+      decorated = CatDecorator.decorate(cats) do |collection, item|
+        collection.links << "/cats"
+        collection.href "/cats"
+        item.links << "/cats/#{item.id}"
+        debugger
+        item.href "/cats/#{item.id}"
+      end
+
+      @decorated = JSON[decorated.to_json]["collection"]
+    end
+
+    specify { @decorated["links"].should == ["/cats"] }
+    specify { @decorated["href"].should == "/cats" }
+    specify { @decorated["items"][0]["href"].should == "/cats/1" }
   end
 
   describe ".decorate_collection" do
@@ -159,24 +194,24 @@ describe CollectionJson::Decorator do
 
         "links" => [
           {"rel" => "father", "href" => "http://example.com/bananas/tom"},
-        ],
+      ],
 
-        "items" =>
-          [
-            {"data" =>
-              [{"name" => "legs", "value" => 7},
-               {"name" => "eyes", "value" => 8},
-               {"name" => "color", "value" => "blue"}
-              ]
-            },
+      "items" =>
+      [
+        {"data" =>
+         [{"name" => "legs", "value" => 7},
+          {"name" => "eyes", "value" => 8},
+          {"name" => "color", "value" => "blue"}
+         ]
+      },
 
-            {"data" =>
-              [{"name" => "legs",  "value" => 6},
-               {"name" => "face", "value" => "red"}
-              ]
-            }
-          ]
-        }
+        {"data" =>
+         [{"name" => "legs",  "value" => 6},
+          {"name" => "face", "value" => "red"}
+         ]
+      }
+      ]
+      }
       }
     end
     let(:collection) do

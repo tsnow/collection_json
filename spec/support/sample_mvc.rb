@@ -2,16 +2,16 @@ class SpiderCowController
   def index
     spider_cows = SpiderCow.all
 
-    @spider_cows = SpiderCowDecorator.decorate(spider_cows) do |s|
-      s.item_links [{href: spider_cow_path(s), rel: "self"}]
-      s
+    @spider_cows = SpiderCowDecorator.decorate(spider_cows) do |collection, item|
+      item.links [{href: spider_cow_path(item), rel: "self"}]
     end
   end
 
   #in real life this method will be made available
   #rather than defined here
-  def spider_cow_path object
-    "/spider_cows/#{object.id}"
+  def spider_cow_path cow
+    debugger
+    "/spider_cows/#{cow.id}"
   end
 end
 
@@ -34,7 +34,6 @@ end
 
 class SpiderCowDecorator
   include CollectionJson::Decorator
-  attr_accessor :id
 end
 
 

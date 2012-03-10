@@ -8,7 +8,7 @@ Gem::Specification.new do |gem|
   gem.summary       = %q{As specified by: http://amundsen.com/media-types/collection/format/#objects}
   gem.homepage      = "https://github.com/markburns/collection_json"
   gem.add_dependency  'virtus'
-  gem.add_dependency  'active_support'
+  gem.add_dependency  'activesupport'
   gem.add_dependency  'i18n'
   gem.add_dependency  'draper'
   gem.add_development_dependency 'guard-rspec'
@@ -16,6 +16,8 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'rspec'
   gem.add_development_dependency 'ruby-debug19'
   gem.add_development_dependency 'ruby-debug-base19', '0.11.26'
+
+  gem.add_development_dependency 'awesome_print'
 
   gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   gem.files         = `git ls-files`.split("\n")

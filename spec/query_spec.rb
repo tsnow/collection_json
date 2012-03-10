@@ -51,7 +51,6 @@ describe CollectionJson::Query do
   end
 
   let(:query_template_with_count) do
-    # query template sample
     {
       queries:
       [

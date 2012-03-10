@@ -21,9 +21,7 @@ module CollectionJson::Decorator
     def decorate object, options={}, &block
       if object.respond_to? :each
         decorate_collection(object, options).tap do |c|
-          c.items = c.items.map do |i|
-            yield i
-          end if block_given?
+          c.items.each { |i| yield c, i } if block_given?
         end
       else
         item = decorate_item object, options

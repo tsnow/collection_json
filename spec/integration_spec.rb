@@ -2,8 +2,6 @@ require './spec/support/sample_mvc'
 
 describe "CollectionJson", type: :integration do
   let(:controller) { SpiderCowController.new      }
-  let(:model)      { SpiderCow.new                }
-  let(:decorator)  { SpiderCowDecorator.new model }
 
   describe "controller#index" do
     before do
