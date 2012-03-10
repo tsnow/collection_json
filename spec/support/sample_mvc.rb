@@ -10,7 +10,6 @@ class SpiderCowController
   #in real life this method will be made available
   #rather than defined here
   def spider_cow_path cow
-    debugger
     "/spider_cows/#{cow.id}"
   end
 end

@@ -3,7 +3,7 @@
 #(via the href property) and an optional array of one or more data
 #elements along with an optional array of one or more link elements.
 module CollectionJson
-  class Item
+  class Item < SimpleDelegator
     attr_accessor :version, :object
     extend FunkyAccessor
     funky_accessor :href, :links
@@ -14,15 +14,14 @@ module CollectionJson
       unless object.respond_to? :attributes
         raise CollectionJson::IncompatibleItem.new("Decorated items must have an attributes method")
       end
+      super object
 
-      debugger
       @version    = "1.0"
       @object     = object          #singular or collection of items
       @links      = options[:links] || [] #top level links
       @href       = options[:href]  #top level href
     end
 
-    delegate :method_missing, :respond_to?, to: :object
     def to_json
       representation.to_json
     end

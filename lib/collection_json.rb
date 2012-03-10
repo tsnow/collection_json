@@ -1,7 +1,6 @@
 require "active_support/dependencies/autoload"
 require "active_support/version"
-require 'active_support/core_ext/module/delegation'
-#require "delegate"
+require "delegate"
 require 'json'
 require 'virtus'
 

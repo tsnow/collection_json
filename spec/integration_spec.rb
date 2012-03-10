@@ -18,11 +18,11 @@ describe "CollectionJson", type: :integration do
       end
     end
 
-    it "defines the link using a lambda" do
+    it "defines the link with a block" do
       items = @spider_cows.items
       item = items.first
 
-      item.item_links.should == [{href: "/spider_cows/1", rel: "self"}]
+      item.links.should == [{href: "/spider_cows/1", rel: "self"}]
     end
   end
 end

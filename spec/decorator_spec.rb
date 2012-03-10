@@ -174,7 +174,6 @@ describe CollectionJson::Decorator do
         collection.links << "/cats"
         collection.href "/cats"
         item.links << "/cats/#{item.id}"
-        debugger
         item.href "/cats/#{item.id}"
       end
 
