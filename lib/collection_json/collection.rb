@@ -6,7 +6,7 @@ module CollectionJson
     def initialize items
       @version    = "1.0"
       @items      = items.map { |i| Item.new(i) }
-      @template = @items.first.blank_template if @items.any?
+      @template = @items.first.template if @items.any?
       @links = []
     end
 

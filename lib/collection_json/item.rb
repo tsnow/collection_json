@@ -20,12 +20,8 @@ module CollectionJson
       representation.to_json
     end
 
-    def blank_template
-      template.map{|h| h[:value]=""; h }
-    end
-
     def template
-      attributes
+      attributes.map{|h| h[:value]=""; h }
     end
 
     def singular_representation

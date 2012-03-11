@@ -29,9 +29,7 @@ module CollectionJson
 
   autoload :Rack
   autoload :Collection
-  autoload :Link
   autoload :Item
-  autoload :Query
   autoload :Template
 
   autoload :InvalidJsonError, 'collection_json/exceptions'
