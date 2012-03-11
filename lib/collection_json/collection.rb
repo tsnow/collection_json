@@ -1,8 +1,7 @@
 module CollectionJson
   class Collection
-    attr_accessor :items, :version, :template
     extend FunkyAccessor
-    funky_accessor :href, :links
+    funky_accessor :items, :version, :template, :href, :links
 
     def initialize items
       @version    = "1.0"
