@@ -4,31 +4,28 @@
 #elements along with an optional array of one or more link elements.
 module CollectionJson
   class Item < SimpleDelegator
-    attr_accessor :version, :object
     extend FunkyAccessor
-    funky_accessor :href, :links
+    funky_accessor :href, :links, :version, :object
 
-
-
-    def initialize object, options={}
-      unless object.respond_to? :attributes
-        raise CollectionJson::IncompatibleItem.new("Decorated items must have an attributes method")
-      end
+    def initialize object
+      @object  = object
+      pre_check
       super object
 
-      @version    = "1.0"
-      @object     = object          #singular or collection of items
-      @links      = options[:links] || [] #top level links
-      @href       = options[:href]  #top level href
+      @links   = []
+      @version = "1.0"
     end
 
     def to_json
       representation.to_json
     end
 
-    def link l=nil
-      return links [l] if l
-      links
+    def blank_template
+      template.map{|h| h[:value]=""; h }
+    end
+
+    def template
+      attributes
     end
 
     def singular_representation
@@ -40,7 +37,7 @@ module CollectionJson
     def representation
       r = { version: version}
 
-      r.merge!({href: href})          if href
+      r.merge!({href:  href})         if href
       r.merge!({links: links})        if links
       r.merge!({items: [singular_representation]})
 
@@ -50,6 +47,14 @@ module CollectionJson
     def attributes
       @attributes = @object.attributes || {}
       @attributes.map{|k,v|  {name: k.to_s, value: v}}
+    end
+
+    private
+
+    def pre_check
+      unless object.respond_to? :attributes
+        raise CollectionJson::IncompatibleItem.new("Decorated items must have an attributes method")
+      end
     end
   end
 end

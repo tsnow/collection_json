@@ -1,32 +1,12 @@
 module CollectionJson::Decorator
-  extend ActiveSupport::Concern
+  def decorate object
+    klass = object.respond_to?(:each) ? CollectionJson::Collection : CollectionJson::Item
 
-  module ClassMethods
-    def define_self_link &block
-      @self_link_lambda = block
-    end
-
-    def define_item_links &block
-      @item_link_lambda = block
-    end
-
-    def decorate_collection items, options={}
-      CollectionJson::Collection.new items, options
-    end
-
-    def decorate_item item, options={}, klass=''
-      CollectionJson::Item.new item, options
-    end
-
-    def decorate object, options={}, &block
+    klass.new(object).tap do |o|
       if object.respond_to? :each
-        decorate_collection(object, options).tap do |c|
-          c.items.each { |i| yield c, i } if block_given?
-        end
+        o.items.each { |i| yield o, i } if block_given?
       else
-        item = decorate_item object, options
-        yield item if block_given?
-        item
+        yield o if block_given?
       end
     end
   end
