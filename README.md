@@ -8,10 +8,8 @@ see http://amundsen.com/media-types/collection/format/
 
 ## Usage
 
-This is still experimental at the moment.
-The aim is to be able to include the gem in a Rack app and make for easy
-generation of hypermedia APIs from your resources, effectively something like a
-hypermedia presenter.
+The aim is to include the gem in a Rack app to generate hypermedia APIs from
+your resources, effectively a hypermedia decorator.
 
 Here's a preview of what you should be able to do in a Rails app:
 
@@ -39,7 +37,7 @@ class SpiderCow < ActiveRecord::Base
 end
 
 class SpiderCowDecorator
-  include CollectionJson::Decorator
+  extend CollectionJson::Decorator
 end
 ```
 
@@ -74,6 +72,21 @@ Sample output:
 ```
 
 
+## Installation
+
+Add this line to your application's Gemfile:
+
+    gem 'collection_json'
+
+And then execute:
+
+    $ bundle
+
+Or install it yourself as:
+
+    $ gem install collection_json
+
+
 ##Notes
 
 Collection+JSON specifies the following concepts
@@ -93,20 +106,6 @@ which correspond to the ideas in Rails like so:
   <tr><td>GET   </td><td>index   </td><td>query</td></tr>
 </table>
 
-## Installation
-
-Add this line to your application's Gemfile:
-
-    gem 'collection_json'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install collection_json
-
 ## Contributing
 
 1. Fork it
@@ -114,3 +113,6 @@ Or install it yourself as:
 3. Commit your changes (`git commit -am 'Added some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+
+
