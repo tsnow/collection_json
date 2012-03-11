@@ -24,7 +24,7 @@ class SpiderCowController < ApplicationController
 
   def index
     @spider_cows = SpiderCowDecorator.all do |collection, item|
-      collection.href spider_cows_path
+      collection.href "http://www.youtube.com/watch?v=FavUpD_IjVY"
 
       item.links [{href: spider_cow_path(item),        rel: "self"},
                   {href: spider_cow_path(item.father), rel: "father"}]
